@@ -2,11 +2,12 @@
 #include "pellet.h"
 #include "cheese.h"
 
+
+
 Jerry::Jerry(int** board)
 {
     //set image and size
-    QPixmap Jerryimage("sources/Jerry.png");
-   // QPixmap Jerryimage2("sources/Jerry.png");
+    QPixmap Jerryimage("sources/JerryRight.png");
     //Jerry newjerry(board);
     Jerryimage = Jerryimage.scaledToWidth(50);
     Jerryimage = Jerryimage.scaledToWidth(50);
@@ -31,45 +32,84 @@ void Jerry::setjerrydata(int board[10][10]){
 
 
 }
+void Jerry::setImage(bool cheesey, int UDRL ){
+    QString x;
+    if(cheesey == true) {
+        switch(UDRL){
+
+        //case 0:
+           // break;
+//        case 1:
+//            QPixmap Jerryimage("sources/carryingCheseeLeft.png");
+//            break;
+        case 2:
+            x="sources/carryingCheseeRight.png";
+            break;
+        case 3:
+            x="sources/carryingCheseeLeft.png";
+            break;
+        default:
+            x="sources/carryingCheseeRight.png";
+        }
+
+    }
+    else{
+        switch(UDRL){
+        case 2:
+            x="sources/JerryRight.png";
+            break;
+        case 3:
+            x="sources/JerryLeft.png";
+            break;
+        default:
+            x="sources/JerryRight.png";
+        }
+    }
+    QPixmap Jerryimage(x);
+    Jerryimage = Jerryimage.scaledToWidth(50);
+    Jerryimage = Jerryimage.scaledToWidth(50);
+    setPixmap(Jerryimage);
+}
 
 void Jerry:: keyPressEvent(QKeyEvent* event){
-    if(event->key() ==Qt::Key_Up && data[row-1][column] >=0){
+    QList<QGraphicsItem*> colliding= collidingItems();
+    int  UDRL;// U0 D1 R2 L3   R true
+
+
+    for(int i=0;i<colliding.size();i++){
+        if(typeid((*colliding[i]))== typeid(pellet)){
+            scene()->removeItem(colliding[i]);
+            cheesey=true;
+
+        }}
+
+       if(event->key() ==Qt::Key_Up && data[row-1][column] >=0){
            row--;
+           UDRL = 0;
+           setImage(cheesey,UDRL);
 
        }
        else if(event->key()==Qt::Key_Down && data[row+1][column] >=0){
            row++;
+           UDRL = 1;
+           setImage(cheesey,UDRL);
 
        }
        else if(event->key() == Qt::Key_Right && data[row][column+1]>=0){
            column++;
+           UDRL = 2;
+           setImage(cheesey,UDRL);
 
        }
        else if(event->key()==Qt::Key_Left && data[row][column-1]>=0){
            column--;
+           UDRL = 3;
+           setImage(cheesey,UDRL);
+
 
        }
-    QList<QGraphicsItem*> colliding= collidingItems();
 
-    for(int i=0;i<colliding.size();i++){
+    // cheese is the pellete and pellete is the cheese.
 
-        if(typeid((*colliding[i]))== typeid(pellet)){
-            scene()->removeItem(colliding[i]);
-            //scene()->removeItem(this);
-            QPixmap Jerryimage("sources/jerryrunning2.png");
-
-            Jerryimage = Jerryimage.scaledToWidth(50);
-            Jerryimage = Jerryimage.scaledToWidth(50);
-            setPixmap(Jerryimage);
-
-             // i am trying to make the jerry with cheese icon
-
-        }
-        else if(typeid(*colliding[i])==typeid(cheese)){
-            scene()->removeItem(colliding[i]);
-
-
-        }
-    }
     setPos(50+(50*column),50+(50*row));
 }
