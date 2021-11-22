@@ -12,6 +12,7 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     int row;
     int column;
     bool cheesey=false;
+    QString x = "sources/JerryRight.png";
 public:
     Jerry(int** board);
     void setjerrydata(int board[10][10]);

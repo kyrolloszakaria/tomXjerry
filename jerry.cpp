@@ -33,7 +33,7 @@ void Jerry::setjerrydata(int board[10][10]){
 
 }
 void Jerry::setImage(bool cheesey, int UDRL ){
-    QString x;
+
     if(cheesey == true) {
         switch(UDRL){
 
@@ -48,8 +48,8 @@ void Jerry::setImage(bool cheesey, int UDRL ){
         case 3:
             x="sources/carryingCheseeLeft.png";
             break;
-        default:
-            x="sources/carryingCheseeRight.png";
+        //default:
+
         }
 
     }
@@ -61,8 +61,8 @@ void Jerry::setImage(bool cheesey, int UDRL ){
         case 3:
             x="sources/JerryLeft.png";
             break;
-        default:
-            x="sources/JerryRight.png";
+       // default:
+
         }
     }
     QPixmap Jerryimage(x);
