@@ -10,6 +10,7 @@
 #include "cheese.h"
 #include <jerry.h>
 #include "pellet.h"
+#include<defend.h>
 int main(int argc, char *argv[])
 {
 
@@ -18,7 +19,7 @@ int main(int argc, char *argv[])
     QGraphicsView view;
     QGraphicsScene Scene;
 
-    view.setFixedSize(600,600);
+    view.setFixedSize(500,500);
     view.setWindowTitle("Tom & Jerry");
     QBrush brush(Qt::black);
     view.setBackgroundBrush(brush);
@@ -89,8 +90,12 @@ int main(int argc, char *argv[])
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
 
-    view.show();
-    view.setScene(&Scene);
+defend tom(board);
+Scene.addItem(&tom);
+tom.Tomplay();
+
+view.show();
+view.setScene(&Scene);
 
 
     return a.exec();
