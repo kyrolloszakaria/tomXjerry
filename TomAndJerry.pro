@@ -14,13 +14,16 @@ SOURCES += \
     jerry.cpp \
     main.cpp \
     mainwindow.cpp \
-    pellet.cpp
+    pellet.cpp \
+    defend.cpp 
+
 
 HEADERS += \
     cheese.h \
     jerry.h \
     mainwindow.h \
-    pellet.h
+    pellet.h \
+    defend.h
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
