@@ -1,16 +1,17 @@
 #ifndef CHEESE_H
 #define CHEESE_H
-#include <QGraphicsItem>
-#include <QGraphicsPixmapItem>
+#include <QGraphicsScene>
+#include<QGraphicsPixmapItem>
 
-class cheese:public QObject, public QGraphicsPixmapItem
+
+class cheese:public QObject,public QGraphicsPixmapItem
 {
-    Q_OBJECT;
-    int row;
-    int col;
-    int board[10][10];
+Q_OBJECT
+int board[10][10];
+int row;
+int column;
 public:
-    cheese(int** b);
+    cheese(int**b);
 };
 
 #endif // CHEESE_H

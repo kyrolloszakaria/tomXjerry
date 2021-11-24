@@ -1,17 +1,16 @@
 #ifndef PELLET_H
 #define PELLET_H
-#include <QGraphicsScene>
-#include<QGraphicsPixmapItem>
+#include <QGraphicsItem>
+#include <QGraphicsPixmapItem>
 
-
-class pellet:public QObject,public QGraphicsPixmapItem
+class pellet:public QObject, public QGraphicsPixmapItem
 {
-Q_OBJECT
-int board[10][10];
-int row;
-int column;
+    Q_OBJECT;
+    int row;
+    int col;
+    int board[10][10];
 public:
-    pellet(int**b);
+    pellet(int** b);
 };
 
 #endif // PELLET_H
