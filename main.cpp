@@ -81,6 +81,8 @@ int main(int argc, char *argv[])
 
 
     Jerry jerry(board);
+    Jerry* jpointer;
+    jpointer=&jerry;
     cheese cheese1(board,2,2);
     cheese cheese2(board,2,9);
     cheese cheese3(board,9,2);
@@ -93,10 +95,9 @@ Scene.addItem(&cheese4);
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
 
-defend tom(board);
+defend tom(board,&jerry);
 Scene.addItem(&tom);
 tom.Tomplay();
-
 view.show();
 view.setScene(&Scene);
 

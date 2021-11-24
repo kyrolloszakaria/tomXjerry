@@ -21,7 +21,7 @@ public:
     void setImage(bool cheesey, int UDRL);
     void takeLife();
     void keyPressEvent(QKeyEvent* event);
-
+    friend class defend;
 };
 
 #endif // JERRY_H

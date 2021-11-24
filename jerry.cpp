@@ -29,8 +29,12 @@ Jerry::Jerry(int** board)
 }
 
 void Jerry::takeLife(){
-    lives--;
-    setPos(50+(50*5),50+(50*4));
+    qDebug() << "D\n";
+    //lives--;
+    //scene()->removeItem(this);
+    column = 5;
+    row = 4;
+   //setPos(50+(50*column),50+(50*row));
 }
 void Jerry::setjerrydata(int board[10][10]){
 

@@ -4,11 +4,12 @@
 #include<QtGlobal>
 
 
-defend::defend(int** board)
+defend::defend(int** board,Jerry* j)
 {
         QPixmap tomimage("sources/Tom.png");
         tomimage = tomimage.scaledToWidth(50);
         tomimage = tomimage.scaledToWidth(50);
+        Jerry* jerryhere=j;
         setPixmap(tomimage);
         row=8;
         column=8;
@@ -41,25 +42,28 @@ void defend::Tomplay()
     }
     else if ((randamNumber == 2 )&& (data[row][column-1]!= -1))//right
     {
- column--;
+       column--;
 
     } else if ((randamNumber == 3) && (data[row][column+1]!= -1))//left
     {
      column++;
     }
+    //else{exit;}
      setPos(50+(50*column),50+(50*row));
+    TomCollision(jerryhere);
     QTimer::singleShot(350, this, SLOT(Tomplay()));
 
-
 }
-void defend :: TomCollision(){
 
+void defend::TomCollision(Jerry* j){
+    qDebug() << "A\n";
     QList<QGraphicsItem*> colliding= collidingItems();
-
-
+     qDebug() << "B\n";
     for(int i=0;i<colliding.size();i++){
         if(typeid((*colliding[i]))== typeid(Jerry)){
-            //takeLife();
+             qDebug() << "C\n";
+            j->takeLife();
+            qDebug() << "jerry lives: " << j->lives << "\n";
 }
     }
 }
