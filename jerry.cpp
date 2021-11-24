@@ -12,14 +12,14 @@ Jerry::Jerry(int** board)
     Jerryimage = Jerryimage.scaledToWidth(50);
     Jerryimage = Jerryimage.scaledToWidth(50);
     setPixmap(Jerryimage);
-
+    lives =3;
 
     //QPix* ne2= &Jerryimage2;
 
 
     //set positon
-    row =1;
-    column = 1;
+    row =4;
+    column = 5;
     setPos(50+(50*column),50+(50*row));
 
     for(int i =0; i<10; i++)
@@ -28,6 +28,10 @@ Jerry::Jerry(int** board)
         }
 }
 
+void Jerry::takeLife(){
+    lives--;
+    setPos(50+(50*5),50+(50*4));
+}
 void Jerry::setjerrydata(int board[10][10]){
 
 
@@ -77,7 +81,7 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
 
 
     for(int i=0;i<colliding.size();i++){
-        if(typeid((*colliding[i]))== typeid(pellet)){
+        if(typeid((*colliding[i]))== typeid(cheese)){
             scene()->removeItem(colliding[i]);
             cheesey=true;
 
@@ -105,7 +109,6 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
            column--;
            UDRL = 3;
            setImage(cheesey,UDRL);
-
 
        }
 

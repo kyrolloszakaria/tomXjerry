@@ -13,12 +13,15 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     int column;
     bool cheesey=false;
     QString x = "sources/JerryRight.png";
+    int lives;
 public:
     Jerry(int** board);
     void setjerrydata(int board[10][10]);
 //public slots:
     void setImage(bool cheesey, int UDRL);
+    void takeLife();
     void keyPressEvent(QKeyEvent* event);
+
 };
 
 #endif // JERRY_H

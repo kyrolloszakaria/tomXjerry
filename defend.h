@@ -18,6 +18,7 @@ public:
 
 public slots:
     void Tomplay();
+    void TomCollision();
 
 };
 

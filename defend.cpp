@@ -1,6 +1,8 @@
 #include "defend.h"
+#include "jerry.h"
 #include<QTimer>
 #include<QtGlobal>
+
 
 defend::defend(int** board)
 {
@@ -48,6 +50,18 @@ void defend::Tomplay()
      setPos(50+(50*column),50+(50*row));
     QTimer::singleShot(350, this, SLOT(Tomplay()));
 
+
+}
+void defend :: TomCollision(){
+
+    QList<QGraphicsItem*> colliding= collidingItems();
+
+
+    for(int i=0;i<colliding.size();i++){
+        if(typeid((*colliding[i]))== typeid(Jerry)){
+            //takeLife();
+}
+    }
 }
 
 

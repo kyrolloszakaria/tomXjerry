@@ -12,6 +12,7 @@ int row;
 int column;
 public:
     cheese(int**b);
+    cheese(int**b,int row, int col);
 };
 
 #endif // CHEESE_H

@@ -19,7 +19,7 @@ int main(int argc, char *argv[])
     QGraphicsView view;
     QGraphicsScene Scene;
 
-    view.setFixedSize(500,500);
+    view.setFixedSize(600,600);
     view.setWindowTitle("Tom & Jerry");
     QBrush brush(Qt::black);
     view.setBackgroundBrush(brush);
@@ -81,12 +81,15 @@ int main(int argc, char *argv[])
 
 
     Jerry jerry(board);
-    pellet cheesepellet(board);
-    cheese pellet1(board);
+    cheese cheese1(board,2,2);
+    cheese cheese2(board,2,9);
+    cheese cheese3(board,9,2);
+    cheese cheese4(board,9,9);
     Scene.addItem(&jerry);
-    Scene.addItem(&pellet1);
-    Scene.addItem(&cheesepellet);
-
+    Scene.addItem(&cheese1);
+Scene.addItem(&cheese2);
+Scene.addItem(&cheese3);
+Scene.addItem(&cheese4);
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
 
