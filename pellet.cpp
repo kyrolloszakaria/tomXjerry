@@ -1,20 +1,17 @@
 #include "pellet.h"
 
-pellet::pellet(int**b)
+pellet::pellet(int **b)
 {
-    QPixmap cheese("sources/cheese.png");
-    cheese=cheese.scaledToHeight(50);
-    cheese=cheese.scaledToWidth(50);
-    setPixmap(cheese);
-    row=50*6;
-    column= 50*6;
-
-    setPos(row,column);
+    QPixmap pellet1("sources/meatcartoon_prev_ui.png");
+    pellet1=pellet1.scaledToWidth(50);
+    pellet1=pellet1.scaledToHeight(50);
+    setPixmap(pellet1);
+    row=50*5;
+    col=50*9;
     for(int i=0;i<10;i++)
         for(int j=0;j<10;j++)
             board[i][j]=b[i][j];
-
-
-
+    setPos(row,col);
 
 }
+
