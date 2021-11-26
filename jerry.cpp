@@ -1,6 +1,7 @@
 #include "jerry.h"
 #include "pellet.h"
 #include "cheese.h"
+#include "defend.h"
 
 
 
@@ -12,14 +13,16 @@ Jerry::Jerry(int** board)
     Jerryimage = Jerryimage.scaledToWidth(50);
     Jerryimage = Jerryimage.scaledToWidth(50);
     setPixmap(Jerryimage);
+    lives =3;
+    board2= board;
 
 
     //QPix* ne2= &Jerryimage2;
 
 
     //set positon
-    row =1;
-    column = 1;
+    row =4;
+    column = 5;
     setPos(50+(50*column),50+(50*row));
 
     for(int i =0; i<10; i++)
@@ -28,6 +31,19 @@ Jerry::Jerry(int** board)
         }
 }
 
+void Jerry::takeLife(){
+
+    keyPressEnable = false;
+    qDebug() << "D\n";
+    //lives--;
+    qDebug() << "E\n";
+    //column = 5;
+
+    qDebug() << "F\n";
+    //row = 4;
+   setPos(50+(50*5),50+(50*4));
+   keyPressEnable=true;
+}
 void Jerry::setjerrydata(int board[10][10]){
 
 
@@ -37,11 +53,10 @@ void Jerry::setImage(bool cheesey, int UDRL ){
     if(cheesey == true) {
         switch(UDRL){
 
-        //case 0:
-           // break;
-//        case 1:
-//            QPixmap Jerryimage("sources/carryingCheseeLeft.png");
-//            break;
+        case 0:
+           x = "sources/carryingCheseeRight.png";
+        case 1:
+            x="sources/carryingCheseeLeft.png";
         case 2:
             x="sources/carryingCheseeRight.png";
             break;
@@ -55,6 +70,11 @@ void Jerry::setImage(bool cheesey, int UDRL ){
     }
     else{
         switch(UDRL){
+        case 0:
+            x="sources/JerryRight.png";
+            break;
+        case 1:
+            x="sources/JerryRight.png";
         case 2:
             x="sources/JerryRight.png";
             break;
@@ -73,15 +93,32 @@ void Jerry::setImage(bool cheesey, int UDRL ){
 
 void Jerry:: keyPressEvent(QKeyEvent* event){
     QList<QGraphicsItem*> colliding= collidingItems();
+
     int  UDRL;// U0 D1 R2 L3   R true
 
-
     for(int i=0;i<colliding.size();i++){
-        if(typeid((*colliding[i]))== typeid(pellet)){
-            scene()->removeItem(colliding[i]);
+        if(typeid((*colliding[i]))== typeid(cheese)){
+            removed.push_back(colliding[i]); //stack behaviour
+            scene()->removeItem(colliding[i]); //make another array of type colliding i and save index and then re-add
             cheesey=true;
+            rowCheese=row;
+            colCheese=column;
 
-        }}
+        }
+        if(typeid((*colliding[i]))==typeid(defend)){
+            if(cheesey==true){
+                row = 4;
+                column = 5;
+                scene()->addItem(removed[0]);
+                //cheese temp(board2,rowCheese,colCheese);
+                //(&temp);
+                cheesey = false;
+                }
+            setPos(50+(50*column),50+(50*row));
+        }
+
+        }
+
 
        if(event->key() ==Qt::Key_Up && data[row-1][column] >=0){
            row--;
@@ -106,10 +143,10 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
            UDRL = 3;
            setImage(cheesey,UDRL);
 
-
        }
 
     // cheese is the pellete and pellete is the cheese.
 
     setPos(50+(50*column),50+(50*row));
 }
+

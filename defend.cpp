@@ -1,6 +1,8 @@
 #include "defend.h"
+#include "jerry.h"
 #include<QTimer>
 #include<QtGlobal>
+
 
 defend::defend(int** board)
 {
@@ -39,15 +41,29 @@ void defend::Tomplay()
     }
     else if ((randamNumber == 2 )&& (data[row][column-1]!= -1))//right
     {
- column--;
+       column--;
 
     } else if ((randamNumber == 3) && (data[row][column+1]!= -1))//left
     {
      column++;
     }
+    //else{exit;}
      setPos(50+(50*column),50+(50*row));
     QTimer::singleShot(350, this, SLOT(Tomplay()));
 
 }
+
+//void defend::TomCollision(Jerry &j){
+//    qDebug() << "A\n";
+//    QList<QGraphicsItem*> colliding= collidingItems();
+//     qDebug() << "B\n";
+//    for(int i=0;i<colliding.size();i++){
+//        if(typeid((*colliding[i]))== typeid(Jerry)){
+//             qDebug() << "C\n";
+//            j.takeLife();
+//           // qDebug() << "jerry lives: " << j->lives << "\n";
+//}
+//    }
+//}
 
 

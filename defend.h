@@ -14,10 +14,12 @@ class defend: public QObject, public QGraphicsPixmapItem
     //int previousMove[10][10];
 
 public:
-    defend(int** board);
 
+    defend(int** board);
+    //friend class Jerry;
 public slots:
     void Tomplay();
+  //  void TomCollision(Jerry &j);
 
 };
 
