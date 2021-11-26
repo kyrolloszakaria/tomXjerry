@@ -111,6 +111,8 @@ int main(int argc, char *argv[])
 Scene.addItem(&cheese2);
 Scene.addItem(&cheese3);
 Scene.addItem(&cheese4);
+pellet ghost(board);
+Scene.addItem(&ghost);
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
 

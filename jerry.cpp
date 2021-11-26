@@ -14,6 +14,8 @@ Jerry::Jerry(int** board)
     Jerryimage = Jerryimage.scaledToWidth(50);
     setPixmap(Jerryimage);
     lives =3;
+    board2= board;
+
 
     //QPix* ne2= &Jerryimage2;
 
@@ -91,21 +93,30 @@ void Jerry::setImage(bool cheesey, int UDRL ){
 
 void Jerry:: keyPressEvent(QKeyEvent* event){
     QList<QGraphicsItem*> colliding= collidingItems();
+
     int  UDRL;// U0 D1 R2 L3   R true
 
     for(int i=0;i<colliding.size();i++){
         if(typeid((*colliding[i]))== typeid(cheese)){
-            scene()->removeItem(colliding[i]);
+            removed.push_back(colliding[i]); //stack behaviour
+            scene()->removeItem(colliding[i]); //make another array of type colliding i and save index and then re-add
             cheesey=true;
+            rowCheese=row;
+            colCheese=column;
 
         }
         if(typeid((*colliding[i]))==typeid(defend)){
-            row = 4;
-            column = 5;
-            cheesey = false;
+            if(cheesey==true){
+                row = 4;
+                column = 5;
+                scene()->addItem(removed[0]);
+                //cheese temp(board2,rowCheese,colCheese);
+                //(&temp);
+                cheesey = false;
+                }
             setPos(50+(50*column),50+(50*row));
+        }
 
-            }
         }
 
 

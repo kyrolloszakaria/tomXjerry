@@ -14,6 +14,10 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     bool cheesey=false;
     QString x = "sources/JerryRight.png";
     int lives;
+    int rowCheese;
+    int colCheese;
+    int ** board2;
+    QList<QGraphicsItem*> removed;
     bool keyPressEnable;
 public:
     Jerry(int** board);
