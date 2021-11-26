@@ -1,6 +1,7 @@
 #include <QApplication>
 #include<QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 #include<QGraphicsPixmapItem>
 #include<QDir>
 #include<QFile>
@@ -11,6 +12,13 @@
 #include <jerry.h>
 #include "pellet.h"
 #include<defend.h>
+#include <QList>
+
+
+
+
+
+
 int main(int argc, char *argv[])
 {
 
@@ -61,6 +69,14 @@ int main(int argc, char *argv[])
     QPixmap grassImage("sources/Grass.png");
     grassImage=grassImage.scaledToWidth(50);
     grassImage=grassImage.scaledToHeight(50);
+    QPixmap homeImage("sources/home.png");
+    homeImage=homeImage.scaledToWidth(50);
+    homeImage=homeImage.scaledToHeight(50);
+    QPixmap homeLandImage("sources/homeland.png");
+    homeLandImage=homeLandImage.scaledToWidth(50);
+    homeLandImage=homeLandImage.scaledToHeight(50);
+
+
 
     QGraphicsPixmapItem boardItem[10][10];
 
@@ -71,6 +87,11 @@ int main(int argc, char *argv[])
             if (board[i][j]<0)
 
                 boardItem[i][j].setPixmap(bricksImage);
+            else if(board[i][j]==98)
+                boardItem[i][j].setPixmap(homeImage);
+            else if(board[i][j]==99)
+                boardItem[i][j].setPixmap(homeLandImage);
+
             else
                 boardItem[i][j].setPixmap(grassImage);
             boardItem[i][j].setPos(50+(50*j),50+(50*i));
@@ -81,8 +102,6 @@ int main(int argc, char *argv[])
 
 
     Jerry jerry(board);
-    Jerry* jpointer;
-    jpointer=&jerry;
     cheese cheese1(board,2,2);
     cheese cheese2(board,2,9);
     cheese cheese3(board,9,2);
@@ -95,9 +114,12 @@ Scene.addItem(&cheese4);
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
 
-defend tom(board,&jerry);
+defend tom(board);
 Scene.addItem(&tom);
 tom.Tomplay();
+
+
+
 view.show();
 view.setScene(&Scene);
 
