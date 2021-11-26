@@ -4,6 +4,11 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QList>
+#include <QTimer>
+#include "pellet.h"
+#include "cheese.h"
+#include "defend.h"
+#include "health.h"
 class Jerry : public QObject, public QGraphicsPixmapItem
 {
 
@@ -12,21 +17,19 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     int row;
     int column;
     bool cheesey=false;
+    bool ghosted=false;
     QString x = "sources/JerryRight.png";
     int lives;
-    int rowCheese;
-    int colCheese;
-    int ** board2;
-    QList<QGraphicsItem*> removed;
+    int cheeseNumber;
     bool keyPressEnable;
+    QList<QGraphicsItem*> removed;
 public:
     Jerry(int** board);
-    void setjerrydata(int board[10][10]);
-//public slots:
     void setImage(bool cheesey, int UDRL);
-    void takeLife();
-    void keyPressEvent(QKeyEvent* event);
     friend class defend;
+public slots:
+    void keyPressEvent(QKeyEvent* event);
+    void disableGhosted();
 };
 
 #endif // JERRY_H

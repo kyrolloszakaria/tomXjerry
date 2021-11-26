@@ -11,13 +11,10 @@
 #include "cheese.h"
 #include <jerry.h>
 #include "pellet.h"
+#include "home.h"
 #include<defend.h>
 #include <QList>
-
-
-
-
-
+#include<health.h>
 
 int main(int argc, char *argv[])
 {
@@ -69,9 +66,9 @@ int main(int argc, char *argv[])
     QPixmap grassImage("sources/Grass.png");
     grassImage=grassImage.scaledToWidth(50);
     grassImage=grassImage.scaledToHeight(50);
-    QPixmap homeImage("sources/home.png");
-    homeImage=homeImage.scaledToWidth(50);
-    homeImage=homeImage.scaledToHeight(50);
+//    QPixmap homeImage("sources/home.png");
+//    homeImage=homeImage.scaledToWidth(50);
+//    homeImage=homeImage.scaledToHeight(50);
     QPixmap homeLandImage("sources/homeland.png");
     homeLandImage=homeLandImage.scaledToWidth(50);
     homeLandImage=homeLandImage.scaledToHeight(50);
@@ -87,8 +84,8 @@ int main(int argc, char *argv[])
             if (board[i][j]<0)
 
                 boardItem[i][j].setPixmap(bricksImage);
-            else if(board[i][j]==98)
-                boardItem[i][j].setPixmap(homeImage);
+          //  else if(board[i][j]==98)
+           //     boardItem[i][j].setPixmap(homeImage);
             else if(board[i][j]==99)
                 boardItem[i][j].setPixmap(homeLandImage);
 
@@ -100,7 +97,8 @@ int main(int argc, char *argv[])
 
     }
 
-
+//   health hearts(3);
+//   Scene.addItem(&hearts);
     Jerry jerry(board);
     cheese cheese1(board,2,2);
     cheese cheese2(board,2,9);
@@ -115,6 +113,9 @@ pellet ghost(board);
 Scene.addItem(&ghost);
 jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
 jerry.setFocus();
+
+home home;
+Scene.addItem(&home);
 
 defend tom(board);
 Scene.addItem(&tom);
