@@ -86,9 +86,10 @@ int main(int argc, char *argv[])
                 boardItem[i][j].setPixmap(bricksImage);
           //  else if(board[i][j]==98)
            //     boardItem[i][j].setPixmap(homeImage);
-            else if(board[i][j]==99)
+            else if(board[i][j]==99){
+                qDebug() << i << " " << j;
                 boardItem[i][j].setPixmap(homeLandImage);
-
+}
             else
                 boardItem[i][j].setPixmap(grassImage);
             boardItem[i][j].setPos(50+(50*j),50+(50*i));

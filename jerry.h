@@ -1,8 +1,10 @@
 #ifndef JERRY_H
 #define JERRY_H
 #include <QGraphicsPixmapItem>
+#include <QPixmap>
 #include <QGraphicsScene>
 #include <QKeyEvent>
+#include <QGraphicsItem>
 #include <QList>
 #include <QTimer>
 #include "pellet.h"
@@ -14,6 +16,14 @@ class Jerry : public QObject, public QGraphicsPixmapItem
 {
 
     Q_OBJECT
+
+    QGraphicsPixmapItem land1;
+    QGraphicsPixmapItem land2;
+    QGraphicsPixmapItem land3;
+    QGraphicsPixmapItem land4;
+
+
+
     int data[10][10];
     int row;
     int column;

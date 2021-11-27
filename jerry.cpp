@@ -90,7 +90,7 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             row = 4;
             column = 5;
             lives--;
-            qDebug() << lives;
+         //   qDebug() << lives;
 
             if (cheesey == true){
                 QGraphicsItem* xx = removed.front();
@@ -113,23 +113,48 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
 if (typeid((*colliding[i]))==typeid(home)){
   if (cheesey == true){
       switch(cheeseNumber){
-      case 1:
+      case 1:{
           cheesey =false;
-
+          QPixmap cheeseonland1("sources/cheese.png");
+          cheeseonland1=cheeseonland1.scaledToHeight(50);
+          cheeseonland1=cheeseonland1.scaledToWidth(50);
+          land1.setPixmap(cheeseonland1);
+          land1.setPos(50+(50*6),50+(50*4));
+         scene()->addItem(&land1);
           break;
-      case 2:
+      }
+      case 2:{
+
           cheesey =false;
-
+          QPixmap cheeseonland2("sources/cheese.png");
+          cheeseonland2=cheeseonland2.scaledToHeight(50);
+          cheeseonland2=cheeseonland2.scaledToWidth(50);
+          land2.setPixmap(cheeseonland2);
+          land2.setPos(50+(50*4),50+(50*4));
+         scene()->addItem(&land2);
           break;
-      case 3:
+      }
+      case 3:{
           cheesey =false;
-
+          QPixmap cheeseonland3("sources/cheese.png");
+          cheeseonland3=cheeseonland3.scaledToHeight(50);
+          cheeseonland3=cheeseonland3.scaledToWidth(50);
+          land3.setPixmap(cheeseonland3);
+          land3.setPos(50+(50*5),50+(50*3));
+         scene()->addItem(&land3);
           break;
-      case 4:
+      }
+      case 4:{
+
           cheesey =false;
-
+          QPixmap cheeseonland4("sources/cheese.png");
+          cheeseonland4=cheeseonland4.scaledToHeight(50);
+          cheeseonland4=cheeseonland4.scaledToWidth(50);
+          land4.setPixmap(cheeseonland4);
+          land4.setPos(50+(50*5),50+(50*5));
+         scene()->addItem(&land4);
           break;
-
+}
       }
   }
 }
