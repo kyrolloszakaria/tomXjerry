@@ -91,7 +91,45 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             row = 4;
             column = 5;
             lives--;
-         //   qDebug() << lives;
+            switch(lives){
+            case 2:
+            {
+                QPixmap heart2image("sources/heart2.png");
+                heart2image=heart2image.scaledToHeight(165);
+                heart2image=heart2image.scaledToWidth(165);
+                heart.setPixmap(heart2image);
+                heart.setPos(50,0);
+               scene()->addItem(&heart);
+               break;
+            }
+            case 1:
+            {
+                QPixmap heartimage("sources/heart1.png");
+                heartimage=heartimage.scaledToHeight(165);
+                heartimage=heartimage.scaledToWidth(165);
+                heart.setPixmap(heartimage);
+                heart.setPos(50,0);
+               scene()->addItem(&heart);
+               break;
+
+            }
+            case 0:{
+                QPixmap heartimage("sources/heart0.png");
+                heartimage=heartimage.scaledToHeight(165);
+                heartimage=heartimage.scaledToWidth(165);
+                heart.setPixmap(heartimage);
+                heart.setPos(50,0);
+               scene()->addItem(&heart);
+                QMessageBox msgBox;
+                msgBox.setIcon(QMessageBox::Critical);
+                msgBox.setWindowTitle("Game Over!");
+                msgBox.setText("Tom Caught Jerry!");
+                msgBox.exec();
+                scene()->addWidget(&msgBox);
+                QApplication::quit();
+                break;
+            }
+            }
 
             if (cheesey == true){
                 QGraphicsItem* xx = removed.front();

@@ -25,6 +25,8 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     QGraphicsPixmapItem land3;
     QGraphicsPixmapItem land4;
 
+    QGraphicsPixmapItem heart;
+
 
 
     int data[10][10];

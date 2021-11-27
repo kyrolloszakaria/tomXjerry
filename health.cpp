@@ -1,29 +1,9 @@
 #include "health.h"
 
-health::health(int x)
+health::health()
 {
-    QString newimage;
-    switch(x){
-    case 1:
 
-        newimage = "sources/heart.png";
-        break;
-
-    case 2:
-
-       newimage = "sources/2hearts.png";
-
-        break;
-
-    case 3:
-
-        newimage="sources/3hearts.png";
-
-        break;
-
-     }
-
-    QPixmap heart(newimage);
+    QPixmap heart("sources/heart3.png");
     heart=heart.scaledToWidth(50);
     heart=heart.scaledToHeight(50);
     setPixmap(heart);

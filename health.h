@@ -10,7 +10,7 @@ Q_OBJECT
 private:
     int numberOfLives;
 public:
-    health(int x);
+    health();
     void setNmberOfLives(int x);
     int getNumberOflives();
     void changeImage(int x);
