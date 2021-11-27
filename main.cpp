@@ -97,8 +97,8 @@ int main(int argc, char *argv[])
 
     }
 
-//   health hearts(3);
-//   Scene.addItem(&hearts);
+   health hearts(3);
+   Scene.addItem(&hearts);
     Jerry jerry(board);
     cheese cheese1(board,2,2);
     cheese cheese2(board,2,9);

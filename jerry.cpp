@@ -5,7 +5,6 @@ Jerry::Jerry(int** board)
 {
     //set image and size
     QPixmap Jerryimage("sources/JerryRight.png");
-    //QPixmap lives
     //Jerry newjerry(board);
     Jerryimage = Jerryimage.scaledToWidth(50);
     Jerryimage = Jerryimage.scaledToWidth(50);

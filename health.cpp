@@ -2,41 +2,37 @@
 
 health::health(int x)
 {
-
+    QString newimage;
     switch(x){
-
     case 1:
-     {
-        QPixmap heart("sources/heart.png");
-        heart=heart.scaledToWidth(50);
-        heart=heart.scaledToHeight(50);
-        setPixmap(heart);
-        setPos(50,0);
+
+        newimage = "sources/heart.png";
         break;
-    }
+
     case 2:
-    {
-        QPixmap heart("sources/2hearts.png");
-        heart=heart.scaledToWidth(50);
-        heart=heart.scaledToHeight(50);
-        setPixmap(heart);
-        setPos(50,0);
+
+       newimage = "sources/2hearts.png";
+
         break;
-    }
+
     case 3:
-    {
-        QPixmap heart("sources/3hearts.png");
-        heart=heart.scaledToWidth(50);
-        heart=heart.scaledToHeight(50);
-        setPixmap(heart);
-        setPos(50,0);
+
+        newimage="sources/3hearts.png";
+
         break;
 
-    }
-   }
+     }
 
+    QPixmap heart(newimage);
+    heart=heart.scaledToWidth(50);
+    heart=heart.scaledToHeight(50);
+    setPixmap(heart);
+    setPos(50,0);
 
 }
+
+
+
 
 void health::setNmberOfLives(int x)
 {
