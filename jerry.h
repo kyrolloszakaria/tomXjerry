@@ -9,6 +9,7 @@
 #include "cheese.h"
 #include "defend.h"
 #include "health.h"
+#include "home.h"
 class Jerry : public QObject, public QGraphicsPixmapItem
 {
 

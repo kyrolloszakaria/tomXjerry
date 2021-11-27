@@ -10,7 +10,7 @@ Jerry::Jerry(int** board)
     Jerryimage = Jerryimage.scaledToWidth(50);
     setPixmap(Jerryimage);
     lives =3;
-    cheeseNumber =4;
+    cheeseNumber =0;
      //QPix* ne2= &Jerryimage2;
 
 
@@ -75,12 +75,13 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
     int  UDRL;// U0 D1 R2 L3   R true
 
     for(int i=0;i<colliding.size();i++){
+
         if (cheesey == false){
         if(typeid((*colliding[i]))== typeid(cheese)){
             removed.push_back(colliding[i]);
             scene()->removeItem(colliding[i]);
             cheesey=true;
-
+            cheeseNumber++;
 
 }
         }
@@ -91,7 +92,6 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             lives--;
             qDebug() << lives;
 
-
             if (cheesey == true){
                 QGraphicsItem* xx = removed.front();
                 removed.pop_front();
@@ -99,16 +99,40 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
                 cheesey = false;
             }
 
-
             setPos(50+(50*column),50+(50*row));
             //if (lives <= 0){}
             }
         }
+
+
         if(typeid((*colliding[i]))==typeid(pellet)){
         ghosted = true;
         scene()->removeItem(colliding[i]);
         QTimer::singleShot(15000,this,SLOT(disableGhosted()));
         }
+if (typeid((*colliding[i]))==typeid(home)){
+  if (cheesey == true){
+      switch(cheeseNumber){
+      case 1:
+          cheesey =false;
+
+          break;
+      case 2:
+          cheesey =false;
+
+          break;
+      case 3:
+          cheesey =false;
+
+          break;
+      case 4:
+          cheesey =false;
+
+          break;
+
+      }
+  }
+}
 }
 qDebug() << row << " " << column;
        if(event->key() ==Qt::Key_Up && data[row-1][column] >=0){
