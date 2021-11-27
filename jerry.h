@@ -5,6 +5,9 @@
 #include <QGraphicsScene>
 #include <QKeyEvent>
 #include <QGraphicsItem>
+#include <QMessageBox>
+#include <QWidget>
+#include <QApplication>
 #include <QList>
 #include <QTimer>
 #include "pellet.h"

@@ -9,6 +9,7 @@ Jerry::Jerry(int** board)
     Jerryimage = Jerryimage.scaledToWidth(50);
     Jerryimage = Jerryimage.scaledToWidth(50);
     setPixmap(Jerryimage);
+
     lives =3;
     cheeseNumber =0;
      //QPix* ne2= &Jerryimage2;
@@ -100,7 +101,16 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             }
 
             setPos(50+(50*column),50+(50*row));
-            //if (lives <= 0){}
+            if (lives <= 0){
+                 QMessageBox msgBox;
+                 msgBox.setIcon(QMessageBox::Critical);
+                 msgBox.setWindowTitle("Game Over!");
+                 msgBox.setText("Tom Caught Jerry!");
+                 msgBox.exec();
+                 scene()->addWidget(&msgBox);
+                 QApplication::quit();
+
+            }
             }
         }
 
@@ -152,7 +162,17 @@ if (typeid((*colliding[i]))==typeid(home)){
           cheeseonland4=cheeseonland4.scaledToWidth(50);
           land4.setPixmap(cheeseonland4);
           land4.setPos(50+(50*5),50+(50*5));
-         scene()->addItem(&land4);
+          scene()->addItem(&land4);
+          QMessageBox msgBox;
+          msgBox.setIcon(QMessageBox::Information);
+          msgBox.setWindowTitle("You Won!!");
+          msgBox.setText("Jerry Thanks you!");
+         // QPixmap JerryWin("carryingCheese.png");
+          //msgBox.setIconPixmap(JerryWin);
+          msgBox.exec();
+          scene()->addWidget(&msgBox);
+          QApplication::quit();
+
           break;
 }
       }
