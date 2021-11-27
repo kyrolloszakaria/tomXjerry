@@ -6,14 +6,13 @@ cheese::cheese(int**b)
     cheese=cheese.scaledToHeight(50);
     cheese=cheese.scaledToWidth(50);
     setPixmap(cheese);
-    row=50*2;
-    column= 50*2;
+    row=50;
+    column= 50;
 
     setPos(row,column);
     for(int i=0;i<10;i++)
         for(int j=0;j<10;j++)
             board[i][j]=b[i][j];
-
 }
 
 cheese::cheese(int **b, int r,int c){
@@ -28,6 +27,4 @@ cheese::cheese(int **b, int r,int c){
     for(int i=0;i<10;i++)
         for(int j=0;j<10;j++)
             board[i][j]=b[i][j];
-
-
 }

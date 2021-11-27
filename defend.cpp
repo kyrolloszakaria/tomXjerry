@@ -29,7 +29,7 @@ void defend::Tomplay()
 {
     srand(time(NULL));
     int randamNumber = rand()%4;
-    qDebug() << randamNumber;
+   // qDebug() << randamNumber;
 
     if ((randamNumber == 0 )&& (data[row+1][column]!=-1))//down
     {
