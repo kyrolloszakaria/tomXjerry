@@ -10,7 +10,7 @@ class pellet:public QObject, public QGraphicsPixmapItem
     int col;
     int board[10][10];
 public:
-    pellet(int** b);
+    pellet(int** b, int r, int c);
 };
 
 #endif // PELLET_H

@@ -91,6 +91,7 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             row = 4;
             column = 5;
             lives--;
+<<<<<<< HEAD
             switch(lives){
             case 2:
             {
@@ -100,26 +101,50 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
                 heart.setPixmap(heart2image);
                 heart.setPos(50,0);
                scene()->addItem(&heart);
+=======
+         //   qDebug() << lives;
+            switch(lives){
+            case 2:
+            {
+                QPixmap heart2image("sources/2hearts.png");
+                heart2image=heart2image.scaledToHeight(50);
+                heart2image=heart2image.scaledToWidth(50);
+                heart2.setPixmap(heart2image);
+                heart2.setPos(50,0);
+               scene()->addItem(&heart2);
+>>>>>>> 6f109116665c4b6cc25a64a7ebe813a672b754dd
                break;
             }
             case 1:
             {
+<<<<<<< HEAD
                 QPixmap heartimage("sources/heart1.png");
                 heartimage=heartimage.scaledToHeight(165);
                 heartimage=heartimage.scaledToWidth(165);
                 heart.setPixmap(heartimage);
                 heart.setPos(50,0);
                scene()->addItem(&heart);
+=======
+                QPixmap heartimage("sources/hearts.png");
+                heartimage=heartimage.scaledToHeight(50);
+                heartimage=heartimage.scaledToWidth(50);
+                heart1.setPixmap(heartimage);
+                heart1.setPos(50,0);
+               scene()->addItem(&heart2);
+>>>>>>> 6f109116665c4b6cc25a64a7ebe813a672b754dd
                break;
 
             }
             case 0:{
+<<<<<<< HEAD
                 QPixmap heartimage("sources/heart0.png");
                 heartimage=heartimage.scaledToHeight(165);
                 heartimage=heartimage.scaledToWidth(165);
                 heart.setPixmap(heartimage);
                 heart.setPos(50,0);
                scene()->addItem(&heart);
+=======
+>>>>>>> 6f109116665c4b6cc25a64a7ebe813a672b754dd
                 QMessageBox msgBox;
                 msgBox.setIcon(QMessageBox::Critical);
                 msgBox.setWindowTitle("Game Over!");
@@ -131,6 +156,7 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
             }
             }
 
+                }
             if (cheesey == true){
                 QGraphicsItem* xx = removed.front();
                 removed.pop_front();
@@ -140,17 +166,11 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
 
             setPos(50+(50*column),50+(50*row));
             if (lives <= 0){
-                 QMessageBox msgBox;
-                 msgBox.setIcon(QMessageBox::Critical);
-                 msgBox.setWindowTitle("Game Over!");
-                 msgBox.setText("Tom Caught Jerry!");
-                 msgBox.exec();
-                 scene()->addWidget(&msgBox);
-                 QApplication::quit();
+
 
             }
             }
-        }
+
 
 
         if(typeid((*colliding[i]))==typeid(pellet)){

@@ -25,7 +25,13 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     QGraphicsPixmapItem land3;
     QGraphicsPixmapItem land4;
 
+<<<<<<< HEAD
     QGraphicsPixmapItem heart;
+=======
+    QGraphicsPixmapItem heart1;
+    QGraphicsPixmapItem heart2;
+
+>>>>>>> 6f109116665c4b6cc25a64a7ebe813a672b754dd
 
 
 
