@@ -5,7 +5,7 @@
 #include <QKeyEvent>
 //#include <graph.h>
 
-class defend: public QObject, public QGraphicsPixmapItem
+class defend : public QObject, public QGraphicsPixmapItem
 {
     Q_OBJECT
     int data[10][10];
@@ -14,14 +14,11 @@ class defend: public QObject, public QGraphicsPixmapItem
     //int previousMove[10][10];
 
 public:
-
-    defend(int** board);
+    defend(int **board);
     //friend class Jerry;
 public slots:
     void Tomplay();
-  //  void TomCollision(Jerry &j);
-
+    //  void TomCollision(Jerry &j);
 };
 
 #endif // DEFEND_H
-

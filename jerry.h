@@ -27,24 +27,23 @@ class Jerry : public QObject, public QGraphicsPixmapItem
 
     QGraphicsPixmapItem heart;
 
-
-
     int data[10][10];
     int row;
     int column;
-    bool cheesey=false;
-    bool ghosted=false;
+    bool cheesey = false;
+    bool ghosted = false;
     QString x = "sources/JerryRight.png";
     int lives;
     int cheeseNumber;
     bool keyPressEnable;
-    QList<QGraphicsItem*> removed;
+    QList<QGraphicsItem *> removed;
+
 public:
-    Jerry(int** board);
+    Jerry(int **board);
     void setImage(bool cheesey, int UDRL);
     friend class defend;
 public slots:
-    void keyPressEvent(QKeyEvent* event);
+    void keyPressEvent(QKeyEvent *event);
     void disableGhosted();
 };
 
