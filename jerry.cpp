@@ -142,6 +142,7 @@ void Jerry::keyPressEvent(QKeyEvent *event)
                     removed.pop_front();
                     scene()->addItem(xx);
                     cheesey = false;
+                    cheeseNumber--;
                 }
 
                 setPos(50 + (50 * column), 50 + (50 * row));
