@@ -1,6 +1,7 @@
 #include <QApplication>
 #include<QGraphicsView>
 #include <QGraphicsScene>
+#include <QGraphicsItem>
 #include<QGraphicsPixmapItem>
 #include<QDir>
 #include<QFile>
@@ -10,33 +11,62 @@
 #include "cheese.h"
 #include <jerry.h>
 #include "pellet.h"
+#include "home.h"
 #include<defend.h>
+#include <QList>
+#include<health.h>
+#include<QPushButton>
+#include<QAbstractButton>
+
+
 int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
-
     QGraphicsView view;
     QGraphicsScene Scene;
 
-    view.setFixedSize(500,500);
+//    QGraphicsView view1;
+//    QGraphicsScene Scene1;
+//    view1.setFixedSize(600,600);
+//    view1.setWindowTitle("Tom & Jerry");
+//    QBrush brush(Qt::black);
+//    view1.setBackgroundBrush(brush);
+//    QPixmap MazeGame("sources/MazeGame2.jpg");
+//    MazeGame=MazeGame.scaledToWidth(500);
+//    MazeGame=MazeGame.scaledToHeight(500);
+//    QGraphicsPixmapItem opening;
+//    opening.setPixmap(MazeGame);
+//    opening.setPos(300,300);
+//    Scene1.addItem(&opening);
+//    QPushButton play;
+//    play.setText("play");
+//    play.setGeometry(500,500,100,50);
+//    play.setEnabled(true);
+//    Scene1.addWidget(&play);
+//    view1.show();
+//    view1.setScene(&Scene1);
+
+
+
+    view.setFixedSize(600,600);
     view.setWindowTitle("Tom & Jerry");
     QBrush brush(Qt::black);
     view.setBackgroundBrush(brush);
     //QDir::setCurrent("E:/Fall 2021/CSCS II/Project");
 
     int** board;
-    board = new int*[10];
-    for(int i = 0; i < 10; i++)
-       board[i] = new int[10];
+    board = new int*[20];
+    for(int i = 0; i < 20; i++)
+       board[i] = new int[20];
     QFile file("sources/board.txt");
     file.open(QIODevice::ReadOnly);
     QTextStream stream (&file);
 
     QString temp;
-    for(int i=0;i<10;i++)
+    for(int i=0;i<20;i++)
     {
-        for(int j=0;j<10;j++)
+        for(int j=0;j<20;j++)
         {
             stream>>temp;
             board[i][j]=temp.toInt();
@@ -55,47 +85,72 @@ int main(int argc, char *argv[])
 //        debugStr += "\n";
 //    }
 //    qDebug() << debugStr;
-    QPixmap bricksImage("sources/Bricks.png");
-    bricksImage=bricksImage.scaledToWidth(50);
-    bricksImage=bricksImage.scaledToHeight(50);
-    QPixmap grassImage("sources/Grass.png");
-    grassImage=grassImage.scaledToWidth(50);
-    grassImage=grassImage.scaledToHeight(50);
+    QPixmap bricksImage("sources/Bricks2.jpg");
+    bricksImage=bricksImage.scaledToWidth(25);
+    bricksImage=bricksImage.scaledToHeight(25);
+    QPixmap grassImage("sources/Grass2.jpg");
+    grassImage=grassImage.scaledToWidth(25);
+    grassImage=grassImage.scaledToHeight(25);
+//    QPixmap homeImage("sources/home.png");
+//    homeImage=homeImage.scaledToWidth(50);
+//    homeImage=homeImage.scaledToHeight(50);
+    QPixmap homeLandImage("sources/homeland.png");
+    homeLandImage=homeLandImage.scaledToWidth(25);
+    homeLandImage=homeLandImage.scaledToHeight(25);
 
-    QGraphicsPixmapItem boardItem[10][10];
 
-    for(int i=0;i<10;i++)
+
+    QGraphicsPixmapItem boardItem[20][20];
+
+    for(int i=0;i<20;i++)
     {
-        for(int j=0;j<10;j++)
+        for(int j=0;j<20;j++)
         {
             if (board[i][j]<0)
 
                 boardItem[i][j].setPixmap(bricksImage);
+          //  else if(board[i][j]==98)
+           //     boardItem[i][j].setPixmap(homeImage);
+            else if(board[i][j]==99){
+                //qDebug() << i << " " << j;
+                //boardItem[i][j].setPixmap(homeLandImage);
+                boardItem[i][j].setPixmap(grassImage);
+}
             else
                 boardItem[i][j].setPixmap(grassImage);
-            boardItem[i][j].setPos(50+(50*j),50+(50*i));
+            boardItem[i][j].setPos(25+(25*j),25+(25*i));
             Scene.addItem(&boardItem[i][j]);
         }
 
     }
 
-
+    //health hearts;
+    //Scene.addItem(&hearts);
     Jerry jerry(board);
-    pellet cheesepellet(board);
-    cheese pellet1(board);
+    cheese cheese1(board,2,2);
+    cheese cheese2(board,2,19);
+    cheese cheese3(board,19,2);
+    cheese cheese4(board,19,19);
     Scene.addItem(&jerry);
-    Scene.addItem(&pellet1);
-    Scene.addItem(&cheesepellet);
+    jerry.addhealthtoscence();
+    Scene.addItem(&cheese1);
+    Scene.addItem(&cheese2);
+    Scene.addItem(&cheese3);
+    Scene.addItem(&cheese4);
+    pellet ghost(board);
+    Scene.addItem(&ghost);
+    jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
+    jerry.setFocus();
 
-jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
-jerry.setFocus();
+    home home;
+    Scene.addItem(&home);
 
-defend tom(board);
-Scene.addItem(&tom);
-tom.Tomplay();
+    defend tom(board);
+    Scene.addItem(&tom);
+    tom.Tomplay();
 
-view.show();
-view.setScene(&Scene);
+    view.show();
+    view.setScene(&Scene);
 
 
     return a.exec();

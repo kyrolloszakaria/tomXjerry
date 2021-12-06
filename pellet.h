@@ -8,7 +8,7 @@ class pellet:public QObject, public QGraphicsPixmapItem
     Q_OBJECT;
     int row;
     int col;
-    int board[10][10];
+    int board[20][20];
 public:
     pellet(int** b);
 };

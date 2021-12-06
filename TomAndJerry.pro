@@ -11,6 +11,8 @@ CONFIG += c++11
 
 SOURCES += \
     cheese.cpp \
+    health.cpp \
+    home.cpp \
     jerry.cpp \
     main.cpp \
     mainwindow.cpp \
@@ -20,6 +22,8 @@ SOURCES += \
 
 HEADERS += \
     cheese.h \
+    health.h \
+    home.h \
     jerry.h \
     mainwindow.h \
     pellet.h \
@@ -29,3 +33,5 @@ HEADERS += \
 qnx: target.path = /tmp/$${TARGET}/bin
 else: unix:!android: target.path = /opt/$${TARGET}/bin
 !isEmpty(target.path): INSTALLS += target
+
+FORMS +=
