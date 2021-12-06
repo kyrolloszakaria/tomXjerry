@@ -39,6 +39,7 @@ int main(int argc, char *argv[])
     QTextStream stream(&file);
 
     QString temp;
+
     for (int i = 0; i < 10; i++)
     {
         for (int j = 0; j < 10; j++)
@@ -48,16 +49,32 @@ int main(int argc, char *argv[])
         }
     }
 
-    //    QString debugStr;
-    //    for(int i=0;i<10;i++)
-    //    {
-    //        for(int j=0;j<10;j++)
-    //        {
-    //            debugStr += QString::number(board[i][j]) + " ";
-    //        }
-    //        debugStr += "\n";
-    //    }
-    //    qDebug() << debugStr;
+    const int N = 20;
+    const int INF = 99999;
+    int AM[N][N];
+        for (int i = 0; i < N; i++)
+        {
+            for (int j = 0; j < N; j++)
+            {
+                if (board[i][j]==-1)
+                    AM[i][j] = INF;
+                else
+                    AM[i][j] = 1;
+            }
+        }
+
+//        QString debugStr;
+//        for(int i=0;i<N;i++)
+//        {
+//            for(int j=0;j<N;j++)
+//            {
+//                debugStr += QString::number(AM[i][j]) + " ";
+//            }
+//        debugStr += "##";
+//        }
+//        qDebug() << debugStr;
+
+
     QPixmap bricksImage("sources/Bricks.png");
     bricksImage = bricksImage.scaledToWidth(50);
     bricksImage = bricksImage.scaledToHeight(50);
