@@ -7,6 +7,7 @@ extern int INF;
 extern int difficulty;
 extern int Jrow;
 extern int Jcolumn;
+extern bool freezing;
 
 
 class graph{

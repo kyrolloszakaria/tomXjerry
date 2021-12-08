@@ -31,12 +31,13 @@ QLineEdit* Textptr2;
 accounts* ptraccounts;
 defend* tomptr;
 
-bool freezing = false;
+bool freezing = true;
 void insert()
 {
 
     if ( ptraccounts->Login(Textptr->displayText(),Textptr2->displayText()))
     {
+    freezing = false;
     ptraccounts->currentaccount=Textptr->displayText();
     ptrview->hide();
     ptrview2->show();
@@ -68,11 +69,11 @@ void login()
 int difficulty = 600;
 void easy()
 {
-    difficulty = 900;
+    difficulty = 1500;
 }
 void Normal()
 {
- difficulty = 600;
+ difficulty = 900;
 }
 void hard()
 {
