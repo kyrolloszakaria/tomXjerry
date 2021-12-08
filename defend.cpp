@@ -128,13 +128,13 @@ QVector<int>& path = results[data[Jrow][Jcolumn]];
 if(path.size() >= 2){
 int step = path[1];
 //qDebug()  << "Size: "<< results[data[Jrow][Jcolumn]].size();
-// for (int i = 0; i < results[data[Jrow][Jcolumn]].size(); i++){
+//for (int i = 0; i < results[data[Jrow][Jcolumn]].size(); i++){
 
 
-//     qDebug() << "start vertex: " << data[row][column] <<
-//                 "final vertex: " <<data[Jrow][Jcolumn] <<
-//                "path:" << results[data[Jrow][Jcolumn]][i];
-//     qDebug() <<step;
+     qDebug() << "start vertex: " << data[row][column] <<
+                 "final vertex: " <<data[Jrow][Jcolumn] <<
+                "path:" << step;
+   //  qDebug() <<step;
      if (step == data[row+1][column])//down
      {
          row++;
@@ -154,7 +154,7 @@ int step = path[1];
 // }
 setPos(25+(25*column),25+(25*row));
 }
-QTimer::singleShot(500, this, SLOT(Tomplay()));
+QTimer::singleShot(300, this, SLOT(Tomplay()));
 }
 
 //void defend::TomCollision(Jerry &j){
@@ -169,5 +169,4 @@ QTimer::singleShot(500, this, SLOT(Tomplay()));
 //}
 //    }
 //}
-
 

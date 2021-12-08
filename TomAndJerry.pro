@@ -10,6 +10,7 @@ CONFIG += c++11
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 SOURCES += \
+    accounts.cpp \
     cheese.cpp \
     graph.cpp \
     health.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 
 HEADERS += \
+    accounts.h \
     cheese.h \
     graph.h \
     health.h \
