@@ -17,44 +17,74 @@
 #include<health.h>
 #include<QPushButton>
 #include<QAbstractButton>
+#include "graph.h"
+QApplication* aptr;
+QGraphicsView* ptrview;
+QGraphicsView* ptrview2;
+QGraphicsScene* ptrsc;
 
+
+void insert()
+{
+    ptrview->hide();
+    ptrview2->show();
+    ptrview2->setScene(ptrsc);
+ //   diff = HARD;
+
+    //aptr->exec();
+}
+
+//Graph attributes:
+int INF = 9999;
+int Graph[230][230];
+//Difficulty diff = HARD;
+void addEdge(int i, int j, int w)
+{
+    Graph[i][j] = w;
+}
 
 int main(int argc, char *argv[])
 {
 
     QApplication a(argc, argv);
+    aptr = &a;
+
+    QGraphicsView view1;
+    ptrview = &view1;
+    QGraphicsScene Scene1;
+    view1.setFixedSize(600,600);
+    view1.setWindowTitle("Tom & Jerry");
+    QBrush brush(Qt::black);
+    view1.setBackgroundBrush(brush);
+    QPixmap MazeGame("sources/MazeGame2.jpg");
+    MazeGame=MazeGame.scaledToWidth(500);
+    MazeGame=MazeGame.scaledToHeight(500);
+    QGraphicsPixmapItem opening;
+    opening.setPixmap(MazeGame);
+    opening.setPos(300,300);
+    Scene1.addItem(&opening);
+    QPushButton* ptr;
+    ptr = new QPushButton;
+
+    ptr->setText("play");
+    ptr->setGeometry(500,500,100,50);
+    ptr->setEnabled(true);
+    Scene1.addWidget(ptr);
+    QObject::connect(ptr,&QPushButton::clicked,insert);
+
+    view1.show();
+    view1.setScene(&Scene1);
     QGraphicsView view;
     QGraphicsScene Scene;
 
-//    QGraphicsView view1;
-//    QGraphicsScene Scene1;
-//    view1.setFixedSize(600,600);
-//    view1.setWindowTitle("Tom & Jerry");
-//    QBrush brush(Qt::black);
-//    view1.setBackgroundBrush(brush);
-//    QPixmap MazeGame("sources/MazeGame2.jpg");
-//    MazeGame=MazeGame.scaledToWidth(500);
-//    MazeGame=MazeGame.scaledToHeight(500);
-//    QGraphicsPixmapItem opening;
-//    opening.setPixmap(MazeGame);
-//    opening.setPos(300,300);
-//    Scene1.addItem(&opening);
-//    QPushButton play;
-//    play.setText("play");
-//    play.setGeometry(500,500,100,50);
-//    play.setEnabled(true);
-//    Scene1.addWidget(&play);
-//    view1.show();
-//    view1.setScene(&Scene1);
-
-
+    ptrview2 = &view;
+    ptrsc = &Scene;
 
     view.setFixedSize(600,600);
     view.setWindowTitle("Tom & Jerry");
-    QBrush brush(Qt::black);
+    //QBrush brush(Qt::black);
     view.setBackgroundBrush(brush);
     //QDir::setCurrent("E:/Fall 2021/CSCS II/Project");
-
     int** board;
     board = new int*[20];
     for(int i = 0; i < 20; i++)
@@ -74,13 +104,36 @@ int main(int argc, char *argv[])
         }
 
     }
+    for(int i = 0 ; i<230; i++){
+        for(int j=0; j<230; j++){
+            Graph[i][j] = -1;
+        }
+    }
+// creating the graph:
+    for (int i = 1; i < 19; i++)
+      {
+          for (int j = 1; j < 19; j++)
+          {
+              if (board[i][j] != -1)
+              {
+                  if (board[i][j - 1] != -1)
+                      addEdge(board[i][j], board[i][j - 1], 1);
+                  if (board[i + 1][j] != -1)
+                      addEdge(board[i][j], board[i + 1][j], 1);
+                  if (board[i - 1][j] != -1)
+                      addEdge(board[i][j], board[i - 1][j], 1);
+                  if (board[i][j + 1] != -1)
+                      addEdge(board[i][j], board[i][j + 1], 1);
+              }
+          }
+      }
 
 //    QString debugStr;
-//    for(int i=0;i<10;i++)
+//    for(int i=0;i<20;i++)
 //    {
-//        for(int j=0;j<10;j++)
+//        for(int j=0;j<20;j++)
 //        {
-//            debugStr += QString::number(board[i][j]) + " ";
+//            debugStr += QString::number(Graph[i][j]) + " ";
 //        }
 //        debugStr += "\n";
 //    }
@@ -149,9 +202,9 @@ int main(int argc, char *argv[])
     Scene.addItem(&tom);
     tom.Tomplay();
 
-    view.show();
-    view.setScene(&Scene);
-
+    //qDebug() << " here";
+   // view.show();
+    //view.setScene(&Scene);
 
     return a.exec();
 }

@@ -11,6 +11,7 @@ CONFIG += c++11
 
 SOURCES += \
     cheese.cpp \
+    graph.cpp \
     health.cpp \
     home.cpp \
     jerry.cpp \
@@ -22,6 +23,7 @@ SOURCES += \
 
 HEADERS += \
     cheese.h \
+    graph.h \
     health.h \
     home.h \
     jerry.h \

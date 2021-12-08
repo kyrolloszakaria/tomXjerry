@@ -1,6 +1,8 @@
 #include "jerry.h"
+#include "graph.h"
 
-
+int Jrow;
+int Jcolumn;
 Jerry::Jerry(int** board)
 {
     //set image and size
@@ -18,16 +20,21 @@ Jerry::Jerry(int** board)
 
 
     //set positon
-    row =4;
-    column = 5;
-    setPos(25+(25*column),25+(25*row));
+    Jrow =4;
+    Jcolumn = 5;
+    setPos(25+(25*Jcolumn),25+(25*Jrow));
 
     for(int i =0; i<20; i++)
         for(int j =0; j<20; j++){
             data[i][j] = board[i][j];
         }
 }
-
+int Jerry:: getJrow(){
+    return Jrow;
+}
+int Jerry:: getJcolumn(){
+    return Jcolumn;
+}
 
 
 void Jerry::setImage(bool cheesey, int UDRL ){
@@ -85,9 +92,13 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
     for(int i=0;i<colliding.size();i++){
 
         if (cheesey == false){
+//            qDebug()<< "Size: " << colliding.size() << ", i: " << i;
         if(typeid((*colliding[i]))== typeid(cheese)){
+//            qDebug() << "here0\n";
             removed.push_back(colliding[i]);
+//            qDebug() << "here1\n";
             scene()->removeItem(colliding[i]);
+//            qDebug() << "Here2\n";
             cheesey=true;
             cheeseNumber++;
 
@@ -95,8 +106,8 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
         }
         if (ghosted == false){
         if(typeid((*colliding[i]))==typeid(defend)){
-            row = 9;
-            column = 10;
+            Jrow = 9;
+            Jcolumn = 10;
             lives--;
 
             jerryHealth.changeImage(lives);
@@ -156,13 +167,17 @@ void Jerry:: keyPressEvent(QKeyEvent* event){
 
             if (cheesey == true){
                 QGraphicsItem* xx = removed.front();
+//                qDebug() << "Before poped\n";
                 removed.pop_front();
+//                qDebug() << "Poped\n";
+
                 scene()->addItem(xx);
                 cheesey = false;
+
                 cheeseNumber--;
             }
 
-            setPos(25+(25*column),25+(25*row));
+            setPos(25+(25*Jcolumn),25+(25*Jrow));
             if (lives <= 0){
                  QMessageBox msgBox;
                  msgBox.setIcon(QMessageBox::Critical);
@@ -244,27 +259,27 @@ if (typeid((*colliding[i]))==typeid(home)){
 }
 }
 //qDebug() << row << " " << column;
-       if(event->key() ==Qt::Key_Up && data[row-1][column] >=0){
-           row--;
+       if(event->key() ==Qt::Key_Up && data[Jrow-1][Jcolumn] >=0){
+           Jrow--;
            UDRL = 0;
            setImage(cheesey,UDRL);
 
        }
-       else if(event->key()==Qt::Key_Down && data[row+1][column] >=0){
-           row++;
+       else if(event->key()==Qt::Key_Down && data[Jrow+1][Jcolumn] >=0){
+           Jrow++;
 
            UDRL = 1;
            setImage(cheesey,UDRL);
 
        }
-       else if(event->key() == Qt::Key_Right && data[row][column+1]>=0){
-           column++;
+       else if(event->key() == Qt::Key_Right && data[Jrow][Jcolumn+1]>=0){
+           Jcolumn++;
            UDRL = 2;
            setImage(cheesey,UDRL);
 
        }
-       else if(event->key()==Qt::Key_Left && data[row][column-1]>=0){
-           column--;
+       else if(event->key()==Qt::Key_Left && data[Jrow][Jcolumn-1]>=0){
+           Jcolumn--;
            UDRL = 3;
            setImage(cheesey,UDRL);
 
@@ -272,7 +287,7 @@ if (typeid((*colliding[i]))==typeid(home)){
 
     // cheese is the pellete and pellete is the cheese.
 //qDebug() << row << " " << column;
-       setPos(25+(25*column),25+(25*row));
+       setPos(25+(25*Jcolumn),25+(25*Jrow));
 
 }
 void Jerry::disableGhosted(){

@@ -1,5 +1,6 @@
 #include "defend.h"
 #include "jerry.h"
+//#include "graph.h"
 #include<QTimer>
 #include<QtGlobal>
 
@@ -24,33 +25,135 @@ defend::defend(int** board)
         }
 
 }
+QVector<QVector<int>> defend:: Dijkstra(int Graph[][N], int startVertex)
+{
+
+    //passed as parametar.
+   //startVertex = data[row][column];
+    bool done[N];
+        int previous[N];
+        int cost[N];
+
+        int temp[N][N];
+        for (int i = 0; i < N; i++)
+            for (int j = 0; j < N; j++)
+                if (Graph[i][j] == -1)
+                    temp[i][j] = INF;
+                else
+                    temp[i][j] = Graph[i][j];
+
+        // 1st Row:
+        for (int i = 0; i < N; i++)
+        {
+            if (i == startVertex)
+            {
+                done[i] = true;
+                previous[i] = -1;
+                cost[i] = 0;
+            }
+            else
+            {
+                done[i] = false;
+                previous[i] = startVertex;
+                cost[i] = temp[startVertex][i];
+            }
+        }
+
+        int count = 1;
+        while (count < N)
+        {
+            // Which vertex is done?
+            // Vertex with the lowest cost.
+            int minimum = INF;
+            int currentVertex;
+            for (int i = 0; i < N; i++)
+            {
+                if (done[i] == false && cost[i] < minimum)
+                {
+                    minimum = cost[i];
+                    currentVertex = i;
+                }
+            }
+            done[currentVertex] = true;
+            //
+            for (int i = 0; i < N; i++)
+            {
+                if (done[i] == false)
+                {
+                    int value = cost[currentVertex] + temp[currentVertex][i];
+                    if (value < cost[i])
+                    {
+                        cost[i] = value;
+                        previous[i] = currentVertex;
+                    }
+                }
+            }
+            count++;
+        }
+        QVector<QVector<int>> paths;
+        paths.resize(N);
+        int j;
+        for (int i = 0; i < N; i++)
+        {
+            paths[i].push_back(i);
+            j = i;
+            while (j != startVertex)
+            {
+                paths[i].insert(paths[i].begin(), previous[j]);
+                j = previous[j];
+            }
+        }
+//        for (int i = 0; i < paths[96].size(); i++)
+//           { qDebug() << paths[96][i] << " ";}
+        return paths;
+}
+
 
 void defend::Tomplay()
 {
     srand(time(NULL));
-    int randamNumber = rand()%4;
-   // qDebug() << randamNumber;
+    //to make sure it reads a correct board.
 
-    if ((randamNumber == 0 )&& (data[row+1][column]!=-1))//down
-    {
-        row++;
-    }
-    else if ((randamNumber == 1) && (data[row-1][column]!=-1)) //up
-    {
-      row--;
-    }
-    else if ((randamNumber == 2 )&& (data[row][column-1]!= -1))//right
-    {
-       column--;
+//    for(int i =0; i< 20; i++){
+//        for (int j=0; j<20; j++){
+//            qDebug() << data[i][j] << " ";
+//        }
+//      qDebug() << " ";
+//    }
+QVector<QVector<int>> results = Dijkstra(Graph,data[row][column]);
+qDebug() << data[row][column] << "\n";
 
-    } else if ((randamNumber == 3) && (data[row][column+1]!= -1))//left
-    {
-     column++;
-    }
-    //else{exit;}
-     setPos(25+(25*column),25+(25*row));
-    QTimer::singleShot(130, this, SLOT(Tomplay()));
+QVector<int>& path = results[data[Jrow][Jcolumn]];
+if(path.size() >= 2){
+int step = path[1];
+//qDebug()  << "Size: "<< results[data[Jrow][Jcolumn]].size();
+// for (int i = 0; i < results[data[Jrow][Jcolumn]].size(); i++){
 
+
+//     qDebug() << "start vertex: " << data[row][column] <<
+//                 "final vertex: " <<data[Jrow][Jcolumn] <<
+//                "path:" << results[data[Jrow][Jcolumn]][i];
+//     qDebug() <<step;
+     if (step == data[row+1][column])//down
+     {
+         row++;
+     }
+     else if (step == data[row-1][column]) //up
+     {
+       row--;
+     }
+     else if (step == data[row][column-1])//right
+     {
+        column--;
+
+     } else if (step == data[row][column+1])//left
+     {
+      column++;
+     }
+// }
+setPos(25+(25*column),25+(25*row));
+QTimer::singleShot(650, this, SLOT(Tomplay()));
+}
 }
 
 //void defend::TomCollision(Jerry &j){

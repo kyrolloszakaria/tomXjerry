@@ -16,6 +16,8 @@
 #include "health.h"
 #include "home.h"
 
+
+
 class Jerry : public QObject, public QGraphicsPixmapItem
 {
 
@@ -31,8 +33,6 @@ class Jerry : public QObject, public QGraphicsPixmapItem
 
 
     int data[20][20];
-    int row;
-    int column;
     bool cheesey=false;
     bool ghosted=false;
     QString x = "sources/JerryRight.png";
@@ -41,6 +41,8 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     bool keyPressEnable;
     QList<QGraphicsItem*> removed;
 public:
+    int getJrow();
+    int getJcolumn();
     Jerry(int** board);
     health jerryHealth;
     void setImage(bool cheesey, int UDRL);
