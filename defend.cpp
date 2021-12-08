@@ -125,7 +125,7 @@ QVector<QVector<int>> results = Dijkstra(Graph,data[row][column]);
 //qDebug() << data[row][column] << "\n";
 
 QVector<int>& path = results[data[Jrow][Jcolumn]];
-if(path.size() >= 2){
+if(path.size() >= 2 && path[1] != 107){
 int step = path[1];
 //qDebug()  << "Size: "<< results[data[Jrow][Jcolumn]].size();
 //for (int i = 0; i < results[data[Jrow][Jcolumn]].size(); i++){

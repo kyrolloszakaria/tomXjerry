@@ -163,7 +163,7 @@ int main(int argc, char *argv[])
       {
           for (int j = 1; j < 19; j++)
           {
-              if (board[i][j] != -1)
+              if (board[i][j] != -1 && board[i][j]!= 107)
               {
                   if (board[i][j - 1] != -1)
                       addEdge(board[i][j], board[i][j - 1], 1);
