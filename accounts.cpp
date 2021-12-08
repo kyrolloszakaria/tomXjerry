@@ -47,6 +47,7 @@ accounts::accounts() {
         for (int i = 0; i < 10; i++) {
             arr[i] = NULL; //maybe call parameterised constructor straight away with files as paameters
         }
+        currentscore=10;
         readFile();
 }
 
@@ -210,7 +211,10 @@ void accounts::showAccounts() {
     }
 
 
-
+accounts::~accounts(){
+correctHighScore(currentaccount,currentscore);
+copyTableToFile();
+}
 
 //int main()
 

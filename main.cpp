@@ -35,6 +35,7 @@ void insert()
 
     if ( ptraccounts->Login(Textptr->displayText(),Textptr2->displayText()))
     {
+    ptraccounts->currentaccount=Textptr->displayText();
     ptrview->hide();
     ptrview2->show();
     ptrview2->setScene(ptrsc);
@@ -249,11 +250,7 @@ int main(int argc, char *argv[])
     defend tom(board);
     Scene.addItem(&tom);
     tom.Tomplay();
+    Leaderboard.showAccounts();//copies changews to file
 
-    //qDebug() << " here";
-   // view.show();
-    //view.setScene(&Scene);
-
-    Leaderboard.copyTableToFile(); //copies changews to file
     return a.exec();
 }

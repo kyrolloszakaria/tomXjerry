@@ -23,6 +23,8 @@ class accounts
     int hash(QString n);
 public:
     accounts();
+    QString currentaccount;
+    int currentscore;
     void AddAccount(QString nme, QString pass,int score);
     void copyTableToFile();
     void readFile();
@@ -30,6 +32,7 @@ public:
     void correctHighScore(QString n,int newscore);
     bool Login(QString n, QString pass);
     void showAccounts();
+    ~accounts();
 };
 
 #endif // ACCOUNTS_H
