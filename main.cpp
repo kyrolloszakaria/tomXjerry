@@ -28,6 +28,7 @@ QGraphicsScene* ptrsc;
 QLineEdit* Textptr;
 QLineEdit* Textptr2;
 accounts* ptraccounts;
+defend* tomptr;
 
 
 void insert()
@@ -39,6 +40,7 @@ void insert()
     ptrview->hide();
     ptrview2->show();
     ptrview2->setScene(ptrsc);
+    tomptr->Tomplay();
     }
     else
         Textptr->setText("Error");
@@ -249,7 +251,8 @@ int main(int argc, char *argv[])
 
     defend tom(board);
     Scene.addItem(&tom);
-    tom.Tomplay();
+    tomptr = &tom;
+    //tom.Tomplay();
     Leaderboard.showAccounts();//copies changews to file
 
     return a.exec();
