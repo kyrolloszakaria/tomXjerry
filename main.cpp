@@ -20,6 +20,7 @@
 #include<QLineEdit>
 #include"accounts.h"
 #include "graph.h"
+#include <QCheckBox>
 
 QApplication* aptr;
 QGraphicsView* ptrview;
@@ -30,7 +31,7 @@ QLineEdit* Textptr2;
 accounts* ptraccounts;
 defend* tomptr;
 
-
+bool freezing = false;
 void insert()
 {
 
@@ -40,7 +41,7 @@ void insert()
     ptrview->hide();
     ptrview2->show();
     ptrview2->setScene(ptrsc);
-    tomptr->Tomplay();
+    //tomptr->Tomplay();
     }
     else
         Textptr->setText("Error");
@@ -63,6 +64,21 @@ void login()
    Textptr2->setText("");
 
 }
+
+int difficulty = 600;
+void easy()
+{
+    difficulty = 900;
+}
+void Normal()
+{
+ difficulty = 600;
+}
+void hard()
+{
+ difficulty = 300;
+}
+
 
 int main(int argc, char *argv[])
 {
@@ -119,10 +135,47 @@ int main(int argc, char *argv[])
     Textptr2 = &Text2;
     Text2.setGeometry(455,580,150,30);
     Scene1.addWidget(&Text2);
+    //CheckBox 1
+    QCheckBox*ptr3;
+    ptr3 = new QCheckBox;
+    ptr3->setText("Easy");
+    ptr3->setGeometry(350,650,75,75); //easy
+    ptr3->setStyleSheet("QCheckBox { background-color: transparent }");
+    QFont font3 = ptr3->font();
+    font3.setBold(true);
+    font3.setPointSize(10);
+    ptr3->setFont(font3);
+    Scene1.addWidget(ptr3);
+    //CheckBox 2
+    QCheckBox*ptr4;
+    ptr4 = new QCheckBox;
+    ptr4->setText("Normal");
+    ptr4->setGeometry(425,650,75,75); //Normal
+    ptr4->setStyleSheet("QCheckBox { background-color: transparent }");
+    QFont font4 = ptr4->font();
+    font4.setBold(true);
+    font4.setPointSize(10);
+    ptr4->setFont(font4);
+    Scene1.addWidget(ptr4);
+    //CheckBox 3
+    QCheckBox*ptr5;
+    ptr5 = new QCheckBox;
+    ptr5->setText("Hard");
+    ptr5->setGeometry(500,650,75,75); //Hard
+    ptr5->setStyleSheet("QCheckBox { background-color: transparent }");
+    QFont font5 = ptr5->font();
+    font5.setBold(true);
+    font5.setPointSize(10);
+    ptr5->setFont(font5);
+    Scene1.addWidget(ptr5);
 
 
     QObject::connect(ptr,&QPushButton::clicked,insert);
     QObject::connect(ptr2,&QPushButton::clicked,login);
+    QObject::connect(ptr3,&QCheckBox::clicked,easy);
+    QObject::connect(ptr3,&QCheckBox::clicked,Normal);
+    QObject::connect(ptr5,&QCheckBox::clicked,hard);
+
     view1.show();
     view1.setScene(&Scene1);
     QGraphicsView view;
@@ -251,8 +304,8 @@ int main(int argc, char *argv[])
 
     defend tom(board);
     Scene.addItem(&tom);
-    tomptr = &tom;
-    //tom.Tomplay();
+    //tomptr = &tom;
+    tom.Tomplay();
     Leaderboard.showAccounts();//copies changews to file
 
     return a.exec();

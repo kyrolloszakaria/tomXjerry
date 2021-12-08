@@ -111,6 +111,7 @@ QVector<QVector<int>> defend:: Dijkstra(int Graph[][N], int startVertex)
 
 void defend::Tomplay()
 {
+
     srand(time(NULL));
     qDebug() << "run";
     //to make sure it reads a correct board.
@@ -127,21 +128,21 @@ QVector<QVector<int>> results = Dijkstra(Graph,data[row][column]);
 QVector<int>& path = results[data[Jrow][Jcolumn]];
 if(path.size() >= 2 && path[1] != 107){
 int step = path[1];
-//qDebug()  << "Size: "<< results[data[Jrow][Jcolumn]].size();
-//for (int i = 0; i < results[data[Jrow][Jcolumn]].size(); i++){
+
 
 
      qDebug() << "start vertex: " << data[row][column] <<
                  "final vertex: " <<data[Jrow][Jcolumn] <<
                 "path:" << step;
-   //  qDebug() <<step;
+
      if (step == data[row+1][column])//down
      {
+
          row++;
      }
      else if (step == data[row-1][column]) //up
      {
-       row--;
+         row--;
      }
      else if (step == data[row][column-1])//right
      {
@@ -149,12 +150,15 @@ int step = path[1];
 
      } else if (step == data[row][column+1])//left
      {
-      column++;
+        column++;
      }
-// }
-setPos(25+(25*column),25+(25*row));
+     qDebug() << "C: " <<column  << " R: " << row;
+     setPos(25+(25*column),25+(25*row));
+
+
 }
-QTimer::singleShot(300, this, SLOT(Tomplay()));
+QTimer::singleShot(1000, this, SLOT(Tomplay()));
+
 }
 
 //void defend::TomCollision(Jerry &j){
