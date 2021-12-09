@@ -13,7 +13,8 @@
 #include <QPushButton>
 #include <QAbstractButton>
 #include <QLineEdit>
-
+#include<QMessageBox>
+#include <QLabel>
 #include "health.h"
 #include "accounts.h"
 #include "graph.h"
@@ -27,13 +28,20 @@
 QGraphicsView *ptrview; // login view
 QGraphicsView *ptrview2; // game view
 QGraphicsScene *ptrsc; // game scene
-QLineEdit *Textptr;
-QLineEdit *Textptr2;
+QGraphicsScene *ptrleader; //Leader scene
+QLineEdit *Textptr; //user name :: login
+QLineEdit *Textptr2; // user name :: password
+QLabel* labelLB; // Leadeboard label
 accounts *ptraccounts;
 
 // First Scene slots:
 
 bool freezing = true;
+void showLeaderBoard()
+{
+ptrview2->setScene(ptrleader);
+labelLB->setText(ptraccounts->showAccounts());
+}
 void insert() // play button
 {
     //                     username                password
@@ -103,6 +111,35 @@ int main(int argc, char *argv[])
     QBrush brush(Qt::black);
     view1.setBackgroundBrush(brush);
 
+    //adjsting the leaderBoard
+
+    QGraphicsScene Sceneleader; // leaderBoard scene
+     ptrleader= &Sceneleader;
+
+
+     // leaderboard background image
+     QPixmap LB("sources/LeaderBoard.jpg");
+     LB = LB.scaledToWidth(650);
+     LB = LB.scaledToHeight(650);
+     QGraphicsPixmapItem LBitem;
+     LBitem.setPixmap(LB);
+     LBitem.setPos(300, 300);
+     Sceneleader.addItem(&LBitem);
+
+     // QlineEdit
+
+     QLabel labelLeaderBoard;
+     labelLB = &labelLeaderBoard;
+     labelLeaderBoard.setGeometry(600, 500, 300, 150);
+     labelLB->setStyleSheet("QLabel { background-color: transparent }");
+     QFont font6 = labelLB->font();
+     font6.setBold(true);
+     font6.setPointSize(15);
+     labelLB->setFont(font6);
+     Sceneleader.addWidget(&labelLeaderBoard);
+
+
+    // sign-up and log-in background image
     QPixmap MazeGame("sources/Background2.png");
     MazeGame = MazeGame.scaledToWidth(728);
     MazeGame = MazeGame.scaledToHeight(546);
@@ -194,6 +231,7 @@ int main(int argc, char *argv[])
     QObject::connect(ptr3, &QCheckBox::clicked, easy);
     QObject::connect(ptr3, &QCheckBox::clicked, Normal);
     QObject::connect(ptr5, &QCheckBox::clicked, hard);
+
 
     view1.show(); // login view
     view1.setScene(&Scene1);
@@ -332,7 +370,8 @@ int main(int argc, char *argv[])
     // set focus to jerry.
     jerry.setFlag(QGraphicsPixmapItem::ItemIsFocusable);
     jerry.setFocus();
-
+    QMessageBox* ptr6 =jerry.SetTheScores();
+    QObject::connect( ptr6,&QMessageBox::accepted,showLeaderBoard);
     home home;
     Scene.addItem(&home);
 

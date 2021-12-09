@@ -32,7 +32,7 @@ public:
     void RemoveAccount(QString nme);
     void correctHighScore(QString n, int newscore); // for the leader board
     bool Login(QString n, QString pass); // vaidate credentials
-    void showAccounts(); // for the leader board
+    QString showAccounts(); // for the leader board
     ~accounts();
 };
 

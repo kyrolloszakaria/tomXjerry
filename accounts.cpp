@@ -243,7 +243,7 @@ bool accounts::Login(QString n, QString pass)
     return false;
 }
 
-void accounts::showAccounts()
+QString accounts::showAccounts()
 {
     for (int i = 0; i < 10; i++)
     {
@@ -253,7 +253,8 @@ void accounts::showAccounts()
             temp = arr[i];
             while (temp != NULL)
             {
-                qDebug() << temp->name << " w/ score " << temp->topscore;
+                QString output = temp->name + "  " + QString::number(temp->topscore);
+               return output;
                 temp = temp->next;
             }
         }

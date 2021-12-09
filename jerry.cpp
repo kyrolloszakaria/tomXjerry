@@ -11,6 +11,7 @@ Jerry::Jerry(int **board)
     Jerryimage = Jerryimage.scaledToWidth(25);
     Jerryimage = Jerryimage.scaledToWidth(25);
     setPixmap(Jerryimage);
+    msgPtr=&msgBox;
 
 
     lives = 3;
@@ -27,6 +28,11 @@ Jerry::Jerry(int **board)
         {
             data[i][j] = board[i][j];
         }
+}
+QMessageBox* Jerry::SetTheScores()
+{
+
+   return msgPtr;
 }
 int Jerry::getJrow()
 {
@@ -122,13 +128,13 @@ void Jerry::keyPressEvent(QKeyEvent *event)
 
                 if (lives == 0) // pop-up
                 {
-                    QMessageBox msgBox;
+
                     msgBox.setIcon(QMessageBox::Critical);
                     msgBox.setWindowTitle("Game Over!");
                     msgBox.setText("Tom Caught Jerry!");
                     msgBox.exec();
                     scene()->addWidget(&msgBox);
-                    QApplication::quit();
+                    //QApplication::quit();
                 }
 
                 // qDebug() << lives;
@@ -150,12 +156,13 @@ void Jerry::keyPressEvent(QKeyEvent *event)
                 setPos(25 + (25 * Jcolumn), 25 + (25 * Jrow));
                 if (lives <= 0)
                 {
-                    QMessageBox msgBox;
+
                     msgBox.setIcon(QMessageBox::Critical);
                     msgBox.setWindowTitle("Game Over!");
                     msgBox.setText("Tom Caught Jerry!");
                     msgBox.exec();
                     scene()->addWidget(&msgBox);
+
                     QApplication::quit();
                 }
             }

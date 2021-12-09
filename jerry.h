@@ -9,6 +9,7 @@
 #include <QWidget>
 #include <QApplication>
 #include <QList>
+#include <QObject>
 #include <QTimer>
 #include "pellet.h"
 #include "cheese.h"
@@ -31,7 +32,8 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     //QGraphicsPixmapItem heart;
 
 
-
+    QMessageBox* msgPtr;
+    QMessageBox msgBox;
     int data[20][20];
     bool cheesey=false;
     bool ghosted=false;
@@ -40,7 +42,9 @@ class Jerry : public QObject, public QGraphicsPixmapItem
     int cheeseNumber;
     bool keyPressEnable;
     QList<QGraphicsItem*> removed;
-public:
+
+    public:
+    QMessageBox* SetTheScores();
     int getJrow();
     int getJcolumn();
     Jerry(int** board);
