@@ -11,14 +11,13 @@ Jerry::Jerry(int **board)
     Jerryimage = Jerryimage.scaledToWidth(25);
     Jerryimage = Jerryimage.scaledToWidth(25);
     setPixmap(Jerryimage);
-    // health* H;
-    // H = & jerryHealth;
+
 
     lives = 3;
-    cheeseNumber = 0;
+    cheeseNumber = 0; // corresponding to the number of cheese delivered to home
     // QPix* ne2= &Jerryimage2;
 
-    // set positon
+    // set initial positon
     Jrow = 4;
     Jcolumn = 5;
     setPos(25 + (25 * Jcolumn), 25 + (25 * Jrow));
@@ -38,7 +37,7 @@ int Jerry::getJcolumn()
     return Jcolumn;
 }
 
-void Jerry::setImage(bool cheesey, int UDRL)
+void Jerry::setImage(bool cheesey, int UDRL) // jerry animation
 {
 
     if (cheesey == true)
@@ -59,6 +58,7 @@ void Jerry::setImage(bool cheesey, int UDRL)
             // default:
         }
     }
+
     else
     {
         switch (UDRL)
@@ -95,14 +95,14 @@ void Jerry::keyPressEvent(QKeyEvent *event)
 
     for (int i = 0; i < colliding.size(); i++)
     {
-
         if (cheesey == false)
         {
-            //            qDebug()<< "Size: " << colliding.size() << ", i: " << i;
+            // qDebug()<< "Size: " << colliding.size() << ", i: " << i;
+            //   list of objects collided with jerry
             if (typeid((*colliding[i])) == typeid(cheese))
             {
                 //            qDebug() << "here0\n";
-                removed.push_back(colliding[i]);
+                removed.push_back(colliding[i]); // removed QList save the cheese jerry carried
                 //            qDebug() << "here1\n";
                 scene()->removeItem(colliding[i]);
                 //            qDebug() << "Here2\n";
@@ -118,9 +118,9 @@ void Jerry::keyPressEvent(QKeyEvent *event)
                 Jcolumn = 10;
                 lives--;
 
-                jerryHealth.changeImage(lives);
+                jerryHealth.changeImage(lives); // update hearts
 
-                if (lives == 0)
+                if (lives == 0) // pop-up
                 {
                     QMessageBox msgBox;
                     msgBox.setIcon(QMessageBox::Critical);
@@ -131,54 +131,15 @@ void Jerry::keyPressEvent(QKeyEvent *event)
                     QApplication::quit();
                 }
 
-                qDebug() << lives;
-
-                //            switch(lives){
-                //            case 2:
-                //            {
-                //                QPixmap heart2image("sources/heart2.png");
-                //                heart2image=heart2image.scaledToHeight(165);
-                //                heart2image=heart2image.scaledToWidth(165);
-                //                heart.setPixmap(heart2image);
-                //                heart.setPos(25,0);
-                //               scene()->addItem(&heart);
-                //               break;
-                //            }
-                //            case 1:
-                //            {
-                //                QPixmap heartimage("sources/heart1.png");
-                //                heartimage=heartimage.scaledToHeight(165);
-                //                heartimage=heartimage.scaledToWidth(165);
-                //                heart.setPixmap(heartimage);
-                //                heart.setPos(25,0);
-                //               scene()->addItem(&heart);
-                //               break;
-
-                //            }
-                //            case 0:{
-                //                QPixmap heartimage("sources/heart0.png");
-                //                heartimage=heartimage.scaledToHeight(165);
-                //                heartimage=heartimage.scaledToWidth(165);
-                //                heart.setPixmap(heartimage);
-                //                heart.setPos(25,0);
-                //               scene()->addItem(&heart);
-                //                QMessageBox msgBox;
-                //                msgBox.setIcon(QMessageBox::Critical);
-                //                msgBox.setWindowTitle("Game Over!");
-                //                msgBox.setText("Tom Caught Jerry!");
-                //                msgBox.exec();
-                //                scene()->addWidget(&msgBox);
-                //                QApplication::quit();
-                //                break;
-                //            }
-                //            }
+                // qDebug() << lives;
 
                 if (cheesey == true)
                 {
+                    // return the cheese jerry carried to its place.
                     QGraphicsItem *xx = removed.front();
-                    //                qDebug() << "Before poped\n";
+                    // qDebug() << "Before poped\n";
                     removed.pop_front();
-                    //                qDebug() << "Poped\n";
+                    // qDebug() << "Poped\n";
 
                     scene()->addItem(xx);
                     cheesey = false;
@@ -210,7 +171,7 @@ void Jerry::keyPressEvent(QKeyEvent *event)
         {
             if (cheesey == true)
             {
-                removed.pop_front();
+                removed.pop_front(); // remove the cheese from the temporary list.
                 switch (cheeseNumber)
                 {
                 case 1:
@@ -247,7 +208,7 @@ void Jerry::keyPressEvent(QKeyEvent *event)
                     scene()->addItem(&land3);
                     break;
                 }
-                case 4:
+                case 4: //wining situation
                 {
 
                     cheesey = false;

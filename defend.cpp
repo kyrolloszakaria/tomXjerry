@@ -122,9 +122,10 @@ void defend::Tomplay()
     // qDebug() << data[row][column] << "\n";
 
     QVector<int> &path = results[data[Jrow][Jcolumn]];
-    if (path.size() >= 2 && path[1] != 107)
+    if (path.size() >= 2 && path[1] != 107) // tom will not move if tom is over jerry
+                                            // and will not move through home.
     {
-        int step = path[1];
+        int step = path[1]; // path[1] next step.
 
         qDebug() << "start vertex: " << data[row][column] << "final vertex: " << data[Jrow][Jcolumn] << "path:" << step;
         if (freezing == false)
@@ -154,15 +155,4 @@ void defend::Tomplay()
     QTimer::singleShot(difficulty, this, SLOT(Tomplay()));
 }
 
-// void defend::TomCollision(Jerry &j){
-//     qDebug() << "A\n";
-//     QList<QGraphicsItem*> colliding= collidingItems();
-//      qDebug() << "B\n";
-//     for(int i=0;i<colliding.size();i++){
-//         if(typeid((*colliding[i]))== typeid(Jerry)){
-//              qDebug() << "C\n";
-//             j.takeLife();
-//            // qDebug() << "jerry lives: " << j->lives << "\n";
-// }
-//     }
-// }
+

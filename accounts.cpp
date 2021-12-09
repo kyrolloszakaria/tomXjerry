@@ -12,27 +12,20 @@ Node *accounts::NewNode(QString s, QString p, int sscore)
     n->topscore = sscore;
     return n;
 }
-// 3 files to fill this up
+
 int accounts::hash(QString n)
 {
     int sum = 0;
     sum = n.toInt();
-    for (int i = 0; i < n.size(); i++)
-    {
-        // int x= n[i].tossInt();
-        // sum += n[i];
-    }
-
     sum = sum % 10;
-    // cout << sum << endl;
     return sum;
 };
 
 void accounts::AddAccount(QString nme, QString pass, int score)
 {
     Node *n = NewNode(nme, pass, score);
-    // cout << nme << " has hash of "; //
-    int index = hash(nme); // why is hashing wrong
+    // cout << nme << " has hash of ";
+    int index = hash(nme);
     // cout << index << endl;
     if (arr[index] != NULL)
     {
@@ -102,10 +95,8 @@ void accounts::copyTableToFile()
 void accounts::readFile()
 {
     QFile f("sources/Usernames.txt");
-    QFile fpass("sources/AccountsPass.txt"); // make files instead of passing pointers to files
+    QFile fpass("sources/AccountsPass.txt");
     QFile scor("sources/Scores.txt");
-    // f.open(QIODevice::ReadOnly);
-    // fpass.open(QIODevice::ReadOnly);
     scor.open(QIODevice::ReadOnly);
     QTextStream stream(&f);
     QTextStream stream2(&fpass);
@@ -113,6 +104,8 @@ void accounts::readFile()
     QString name;
     QString password;
     int score;
+
+    // to prevent the code from overwriting the file.
     if (!f.open(QIODevice::ReadOnly) || !fpass.open(QIODevice::ReadOnly))
     {
         qDebug() << "fail";
@@ -122,19 +115,19 @@ void accounts::readFile()
     {
         try
         {
-
+            //
             while (!stream.atEnd() && !stream2.atEnd() && !stream3.atEnd())
             {
                 stream >> name;
                 stream2 >> password;
                 stream3 >> score;
-                if (name != "" && password != "")
+                if (name != "" && password != "") // ignore the first line.
                 {
                     AddAccount(name, password, score);
                 }
             }
         }
-        catch (...)
+        catch (...) // to catch all run-time errors regarding reading the files.
         {
             f.close();
             fpass.close();
@@ -144,9 +137,10 @@ void accounts::readFile()
 }
 
 void accounts::RemoveAccount(QString nme)
-{ // make with 2 pointers  and maybe add password to confirm that it is indeed them
-
-    // make loop to getline for each file and check  if it is the name. then, go to password file with that line and remove
+{
+    // make with 2 pointers  and maybe add password to confirm that it is indeed them
+    // make loop to getline for each file and check  if it is the name.
+    // then, go to password file with that line and remove
     int index = hash(nme);
     QString line;
     Node *temp = arr[index];
@@ -178,7 +172,7 @@ void accounts::RemoveAccount(QString nme)
             }
         }
     }
-} // maybe make another function to check index of name.
+}
 
 void accounts::correctHighScore(QString n, int newscore)
 {
@@ -269,23 +263,7 @@ void accounts::showAccounts()
 accounts::~accounts()
 {
     correctHighScore(currentaccount, currentscore);
-    copyTableToFile();
+    copyTableToFile(); //save to file
 }
 
-// int main()
 
-/*
-{
-    Accounts LeaderBoard;
-    LeaderBoard.readFile();
-
-    LeaderBoard.showAccounts();
-    LeaderBoard.correctHighScore("Mae", 30); //
-
-    LeaderBoard.copyTableToFile();
-    return 0;
-
-
-}*/
-
-// IMPORTANT NOTE ALWAYS COPYTABLE TO FILE IN END. AND READ FILE AT BEGINNING
