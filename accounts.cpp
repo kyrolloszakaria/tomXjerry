@@ -254,9 +254,11 @@ QString accounts::showAccounts()
             while (temp != NULL)
             {
                 QString output = temp->name + "  " + QString::number(temp->topscore);
-               return output;
-                temp = temp->next;
+                return output;
+              //  temp = temp->next;
+
             }
+
         }
     }
 }
